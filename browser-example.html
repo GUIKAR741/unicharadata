@@ -1,20 +1,22 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <script src="unicharadata.js"></script>
-    <script>
-      window.addEventListener("load", _ => {
-        "use strict";
-        const text = "これが🐒です".normalize("NFD");
-        const chars = unicharadata.splitCombined(text);
-        chars.forEach(ch => {
-          const div = document.createElement("div");
-          div.textContent = `${ch} : len = ${ch.length}`;
-          document.body.appendChild(div);
-        });
-      }, false);
-    </script>
-  </head>
-  <body></body>
+
+<head>
+  <meta charset="utf-8" />
+  <script src="unicharadata.js"></script>
+  <script>
+    window.addEventListener("load", _ => {
+      "use strict";
+      const text = "são paulo".normalize("NFKD");
+      let nText = ''
+      for (let i in text) {
+        nText += !unicharadata.combining(text[i]) ? text[i] : ''
+      }
+      console.log(nText.replaceAll(' ', '-'))
+    }, false);
+  </script>
+</head>
+
+<body></body>
+
 </html>
